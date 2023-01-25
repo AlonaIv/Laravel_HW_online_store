@@ -158,4 +158,12 @@ return [
 
         'store' => 'default',
     ],
+
+    'access' => [
+        'categories' => [
+            'publish' => 'Publish Categories',
+            'edit' => 'Edit Categories',
+            'delete' => 'Delete Categories',
+        ]
+    ],
 ];
