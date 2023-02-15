@@ -164,6 +164,12 @@ return [
             'publish' => 'Publish Categories',
             'edit' => 'Edit Categories',
             'delete' => 'Delete Categories',
+        ],
+
+        'products' => [
+            'publish' => 'Publish Products',
+            'edit' => 'Edit Products',
+            'delete' => 'Delete Products',
         ]
     ],
 ];
