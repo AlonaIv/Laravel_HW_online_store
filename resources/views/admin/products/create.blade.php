@@ -34,13 +34,14 @@
                             >
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="category"
+                    <div class="form-group row pt-2">
+                        <label for="categories"
                                class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
                         <div class="col-md-6">
-                            <select name="category"
-                                    id="category"
+                            <select name="categories[]"
+                                    id="categories"
                                     class="form-control @error('category') is-invalid @enderror"
+                                    multiple
                             >
                                 @foreach($categories as $category)
                                     <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
@@ -48,7 +49,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <label for="SKU" class="col-md-4 col-form-label text-md-right">{{ __('SKU') }}</label>
                         <div class="col-md-6">
                             <input id="SKU"
@@ -61,7 +62,7 @@
                             >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
                         <div class="col-md-6">
                             <input id="price"
@@ -74,7 +75,7 @@
                             >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <label for="discount" class="col-md-4 col-form-label text-md-right">{{ __('Discount') }}</label>
                         <div class="col-md-6">
                             <input id="discount"
@@ -87,21 +88,21 @@
                             >
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="in_stock"
-                               class="col-md-4 col-form-label text-md-right">{{ __('In Stock (Quantity)') }}</label>
+                    <div class="form-group row pt-2">
+                        <label for="quantity"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
                         <div class="col-md-6">
-                            <input id="in_stock"
+                            <input id="quantity"
                                    type="number"
-                                   class="form-control @error('in_stock') is-invalid @enderror"
-                                   name="in_stock"
-                                   value="{{ old('in_stock') }}"
-                                   autocomplete="in_stock"
+                                   class="form-control @error('quantity') is-invalid @enderror"
+                                   name="quantity"
+                                   value="{{ old('quantity') }}"
+                                   autocomplete="quantity"
                                    autofocus
                             >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <label for="description"
                                class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                         <div class="col-md-6">
@@ -112,19 +113,19 @@
                                       rows="10">{{ old('description') }}</textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="short_description"
-                               class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>
-                        <div class="col-md-6">
-                            <textarea name="short_description"
-                                      class="form-control @error('short_description') is-invalid @enderror"
-                                      id="short_description"
-                                      cols="30"
-                                      rows="10">{{ old('short_description') }}</textarea>
-                        </div>
-                    </div>
+{{--                    <div class="form-group row pt-2">--}}
+{{--                        <label for="short_description"--}}
+{{--                               class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <textarea name="short_description"--}}
+{{--                                      class="form-control @error('short_description') is-invalid @enderror"--}}
+{{--                                      id="short_description"--}}
+{{--                                      cols="30"--}}
+{{--                                      rows="10">{{ old('short_description') }}</textarea>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <label for="thumbnail"
                                class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
                         <div class="col-md-6">
@@ -139,21 +140,21 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row images-wrapper"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="file" name="images[]" id="images" multiple>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="form-group row pt-2">--}}
+{{--                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-12">--}}
+{{--                                    <div class="row images-wrapper"></div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-12">--}}
+{{--                                    <input type="file" name="images[]" id="images" multiple>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <div class="form-group row">
+                    <div class="form-group row pt-2">
                         <div class="col-md-10 text-right">
                             <input type="submit" class="btn btn-info" value="Create">
                         </div>
