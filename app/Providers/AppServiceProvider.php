@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contract\ImageRepositoryContract;
 use App\Repositories\Contract\ProductRepositoryContract;
+use App\Repositories\ImageRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -10,7 +12,8 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     public array $bindings = [
-        ProductRepositoryContract::class => ProductRepository::class
+        ProductRepositoryContract::class => ProductRepository::class,
+        ImageRepositoryContract::class => ImageRepository::class
     ];
 
     /**
@@ -30,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::useBootstrapFive();
     }
 }

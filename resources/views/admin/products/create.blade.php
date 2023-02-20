@@ -113,47 +113,33 @@
                                       rows="10">{{ old('description') }}</textarea>
                         </div>
                     </div>
-{{--                    <div class="form-group row pt-2">--}}
-{{--                        <label for="short_description"--}}
-{{--                               class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <textarea name="short_description"--}}
-{{--                                      class="form-control @error('short_description') is-invalid @enderror"--}}
-{{--                                      id="short_description"--}}
-{{--                                      cols="30"--}}
-{{--                                      rows="10">{{ old('short_description') }}</textarea>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
                     <div class="form-group row pt-2">
                         <label for="thumbnail"
                                class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="#" id="thumbnail-preview" alt="">
+                            <div class="row pt-2">
+                                <div class="col-md-12">
+                                    <img src="#" id="thumbnail-preview" alt="" style="height: 200px">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input type="file" name="thumbnail" id="thumbnail">
                                 </div>
                             </div>
                         </div>
                     </div>
-
-{{--                    <div class="form-group row pt-2">--}}
-{{--                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-md-12">--}}
-{{--                                    <div class="row images-wrapper"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-12">--}}
-{{--                                    <input type="file" name="images[]" id="images" multiple>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
+                    <div class="form-group row pt-2">
+                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row images-wrapper"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" name="images[]" id="images" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row pt-2">
                         <div class="col-md-10 text-right">
                             <input type="submit" class="btn btn-info" value="Create">
@@ -165,5 +151,7 @@
     </div>
 @endsection
 @push('footer-scripts')
+    <script type="module" src="{{ mix('js/images-preview.js') }}"></script>
+
     {{--    @vite(['resources/js/images-preview.js'])--}}
 @endpush

@@ -30,3 +30,9 @@ Route::name('admin.')->prefix('admin')->middleware(['role:admin|editor'])->group
     Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class)->except(['show']);
     Route::resource('categories', \App\Http\Controllers\Admin\CategoriesController::class)->except(['show']);
 });
+
+Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function () {
+    Route::group(['role:admin|editor'], function () {
+        Route::delete('images/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('images.delete');
+    });
+});

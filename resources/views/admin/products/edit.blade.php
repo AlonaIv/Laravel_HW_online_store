@@ -46,9 +46,10 @@
                             >
                                 @foreach($categories as $category)
                                     <option value="{{ $category['id'] }}"
-                                    @foreach($product_categories as $prCategory)
-                                        {{ $category['id'] === $prCategory->id ? 'selected' : '' }}
-                                        @endforeach
+                                            @if(in_array($category['id'], $product_categories)) selected @endif
+                                        {{--                                    @foreach($product_categories as $prCategory)--}}
+                                        {{--                                        {{ $category['id'] === $prCategory->id ? 'selected' : '' }}--}}
+                                        {{--                                        @endforeach--}}
                                     >{{ $category['name'] }}</option>
                                 @endforeach
                             </select>
@@ -118,24 +119,13 @@
                                       rows="10">{{ $product->description }}</textarea>
                         </div>
                     </div>
-{{--                    <div class="form-group row pt-2">--}}
-{{--                        <label for="description"--}}
-{{--                               class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <textarea name="description"--}}
-{{--                                      class="form-control @error('description') is-invalid @enderror"--}}
-{{--                                      id="description"--}}
-{{--                                      cols="30"--}}
-{{--                                      rows="10">{{ $product->description }}</textarea>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                     <div class="form-group row pt-2">
                         <label for="thumbnail"
                                class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img src="{{ $product->thumbnailUrl  }}" style="height: 100px"
+                                    <img src="{{ $product->thumbnailUrl  }}" style="height: 200px"
                                          id="thumbnail-preview" alt="">
                                 </div>
                                 <div class="col-md-6">
@@ -144,29 +134,30 @@
                             </div>
                         </div>
                     </div>
-                    {{--                    <div class="form-group row pt-2">--}}
-                    {{--                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>--}}
-                    {{--                        <div class="col-md-6">--}}
-                    {{--                            <div class="row">--}}
-                    {{--                                <div class="col-md-12">--}}
-                    {{--                                    <div class="row images-wrapper">--}}
-                    {{--                                        @foreach($product->images as $image)--}}
-                    {{--                                            @if(Storage::has($image->path))--}}
-                    {{--                                                <div class="col-sm-12 d-flex justify-content-center align-items-center">--}}
-                    {{--                                                    <img src="{{ $image->url }}" class="card-img-top" style="max-width: 80%; margin: 0 auto; display: block;">--}}
-                    {{--                                                    <a data-route="{{ route('ajax.images.delete', $image) }}"--}}
-                    {{--                                                       class="btn btn-danger remove-product-image">x</a>--}}
-                    {{--                                                </div>--}}
-                    {{--                                            @endif--}}
-                    {{--                                        @endforeach--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="col-md-12">--}}
-                    {{--                                    <input type="file" name="images[]" id="images" multiple>--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="form-group row pt-2">
+                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row images-wrapper">
+                                        @foreach($product->images as $image)
+                                            @if(Storage::has($image->path))
+                                                <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                                                    <img src="{{ $image->url }}" class="card-img-top"
+                                                         style="max-width: 200px; margin: 0 auto; display: block;">
+                                                    <a data-route="{{ route('ajax.images.delete', $image) }}"
+                                                       class="btn btn-danger remove-product-image">x</a>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" name="images[]" id="images" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group row pt-2">
                         <div class="col-md-10 text-right">
@@ -180,5 +171,6 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{ mix('js/images-preview.js') }}"></script>
     {{--    @vite(['resources/js/images-preview.js', 'resources/js/images-actions.js'])--}}
 @endpush

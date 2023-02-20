@@ -52,4 +52,11 @@ class Product extends Model
                 : $this->attributes['thumbnail']
         );
     }
+
+    public function slug(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => strtolower(str_replace(" ", "_", $this->attributes['title']))
+        );
+    }
 }
