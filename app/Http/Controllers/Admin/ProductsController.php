@@ -63,10 +63,11 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $product = $product->load('categories');
+        $productCategories = $product->categories()->get()->pluck('id')->toArray();
 
         $this->middleware('permission:' . config('permission.access.products.edit'));
 
-        return view('admin/products/edit', ['categories' => Category::all(), 'product' => $product, 'product_categories' => $product->categories]);
+        return view('admin/products/edit', ['categories' => Category::all(), 'product' => $product, 'product_categories' => $productCategories]);
     }
 
     /**
