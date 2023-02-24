@@ -25,6 +25,8 @@ class Product extends Model
         'SKU',
     ];
 
+    protected $sortableAs = ['followers_count'];
+
     public $sortable = [
         'title',
         'id',

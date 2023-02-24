@@ -21,7 +21,7 @@
                         <th class="text-center" scope="col">@sortablelink('title', 'Name')</th>
                         <th class="text-center" scope="col">@sortablelink('quantity', 'Quantity')</th>
                         <th class="text-center" scope="col">Category</th>
-                        <th class="text-center" scope="col">Followers</th>
+                        <th class="text-center" scope="col">@sortablelink('followers_count', 'Followers')</th>
                         <th class="text-center" scope="col">Actions</th>
                     </tr>
                     </thead>
