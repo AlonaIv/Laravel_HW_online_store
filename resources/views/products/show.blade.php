@@ -9,42 +9,27 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <img src="{{ $product->thumbnail }}" class="card-img-top" style="width: 400px; height: 300px; margin: 0 auto; display: block;">
+            <img src="{{ $product->thumbnailUrl }}" class="card-img-top"
+                 style="width: 400px; height: 300px; margin: 0 auto; display: block;">
         </div>
         <div class="col-md-6">
-            {{--            @if ($product->price !== $product->end_price)--}}
-            {{--                <p>Old Price: <span class="old-price">{{ $product->price }}$</span></p>--}}
-            {{--            @endif--}}
-            {{--            <p>Price: {{ $product->end_price }}$</p>--}}
+            @if ($product->price !== $product->end_price)
+                <p>Old Price: <span class="old-price">{{ $product->price }}$</span></p>
+            @endif
+            <p>Price: {{ $product->end_price }}$</p>
             <p>SKU: {{ $product->SKU }}</p>
             <p>In stock: {{ $product->quantity }}</p>
             {{--            <p>Rating: {{ round($product->averageRating(), 2) }}</p>--}}
             <hr>
             <div>
                 <p>Product Category:
-                {{--                    <b> @include('categories.parts.category_view', ['category' => $product->category])</b></p>--}}
+                @each('categories.parts.category_view', $product->categories, 'category')
             </div>
-            @if($product->quantity > 0)
-                <hr>
-                <div>
-                    <p>Add to Cart: </p>
-                    {{--                    <form action="{{ route('cart.add', $product) }}" method="POST" class="form-inline">--}}
-                    {{--                        @csrf--}}
-                    {{--                        <div class="form-group col-sm-3 mb-2">--}}
-                    {{--                            <label for="product_count" class="sr-only">Count: </label>--}}
-                    {{--                            <input type="number"--}}
-                    {{--                                   name="product_count"--}}
-                    {{--                                   class="form-control"--}}
-                    {{--                                   id="product_count"--}}
-                    {{--                                   min="1"--}}
-                    {{--                                   max="{{ $product->in_stock }}"--}}
-                    {{--                                   value="1"--}}
-                    {{--                            >--}}
-                    {{--                        </div>--}}
-                    {{--                        <button type="submit" class="btn btn-primary mb-2">Buy</button>--}}
-                    {{--                    </form>--}}
-                </div>
-            @endif
+            <hr>
+            <div>
+                <p>Add to Cart: </p>
+                @include('products.parts.by_product', ['product'=>$product, 'showQuantity'=>true, 'btnText'=>'Buy'])
+            </div>
             @auth
                 {{--                <form class="form-horizontal poststars" action="{{ route('product.rating.add', $product) }}"--}}
                 {{--                      id="addStar"--}}

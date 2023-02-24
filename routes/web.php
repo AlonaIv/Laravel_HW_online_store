@@ -36,3 +36,17 @@ Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function () {
         Route::delete('images/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('images.delete');
     });
 });
+
+Route::name('account.')->prefix('account')->middleware('role:customer')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Account\UsersController::class, 'index'])->name('index');
+    Route::get('{user}/edit', [\App\Http\Controllers\Account\UsersController::class, 'edit'])->name('edit')
+        ->middleware('can:view,user');
+    Route::put('{user}/update', [\App\Http\Controllers\Account\UsersController::class, 'update'])->name('update');
+});
+
+Route::name('cart.')->prefix('cart')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::post('{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
+    Route::delete('/', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+    Route::post('{product}/count', [\App\Http\Controllers\CartController::class, 'countUpdate'])->name('count.update');
+});
