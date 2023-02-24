@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     public mixed $quantty;
+
     protected $fillable = [
         'title',
         'description',
@@ -23,6 +25,12 @@ class Product extends Model
         'SKU',
     ];
 
+    public $sortable = [
+        'title',
+        'id',
+        'quantity',
+    ];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);
@@ -31,6 +39,16 @@ class Product extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'wish_list',
+            'product_id',
+            'user_id'
+        );
     }
 
     public function setThumbnailAttribute($image)

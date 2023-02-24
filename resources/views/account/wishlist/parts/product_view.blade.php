@@ -10,9 +10,11 @@ $class = $row->price > $row->model->endPrice ? 'text-success' : 'text-danger';
     </td>
     <td>{{ $row->price }}$</td>
     <td class="{{ $class }}">{{ $row->model->endPrice }}$</td>
-    <td>{{ $row->model->available ? 'Available' : 'Not Available' }}</td>
+    <td class="text-{{ $row->model->available ? 'success' : 'danger' }}">
+        {{ $row->model->available ? 'Available' : 'Not Available' }}
+    </td>
     <td>
-        <form action="{{ route('wishlist.delete', $row->id) }}" method="POST">
+        <form action="{{ route('wishlist.remove', $row->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <input type="submit" class="btn btn-danger" value="Remove">

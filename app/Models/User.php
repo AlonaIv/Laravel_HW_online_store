@@ -45,4 +45,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wishes()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'wish_list',
+            'user_id',
+            'product_id'
+        );
+    }
+
+    public function addToWish(Product $product)
+    {
+        $this->wishes()->attach($product);
+    }
+
+    public function removeFromWish(Product $product)
+    {
+        $this->wishes()->detach($product);
+    }
+
+    public function isWishedProduct(Product $product)
+    {
+        return (bool)$this->wishes()->find($product);
+    }
 }

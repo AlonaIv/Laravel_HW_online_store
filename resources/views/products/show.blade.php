@@ -68,16 +68,18 @@
                 {{--                    </div>--}}
                 {{--                </form>--}}
                 <hr>
-                {{--                @if(auth()->user()->isWishedProduct($product))--}}
-                {{--                    <form action="{{ route('wishlist.delete', $product) }}" method="POST">--}}
-                {{--                        @csrf--}}
-                {{--                        @method('DELETE')--}}
-                {{--                        <input type="submit" class="btn btn-danger" value="Remove from Wish List">--}}
-                {{--                    </form>--}}
-                {{--                @else--}}
-                {{--                    <a href="{{ route('wishlist.add', $product) }}"--}}
-                {{--                       class="btn btn-success">{{ __('Add to Wish List') }}</a>--}}
-                {{--                @endif--}}
+                    @if(auth()->user()->isWishedProduct($product))
+                        <form action="{{ route('wishlist.remove', $product) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-outline-danger" value="Remove from Wish List">
+                        </form>
+                    @else
+                        <form action="{{ route('wishlist.add', $product) }}" method="POST">
+                            @csrf
+                            <input type="submit" class="btn btn-outline-success" value="'Add to Wish List">
+                        </form>
+                    @endif
             @endauth
         </div>
     </div>
