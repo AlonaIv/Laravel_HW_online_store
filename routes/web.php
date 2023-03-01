@@ -42,6 +42,7 @@ Route::name('account.')->prefix('account')->middleware('role:customer')->group(f
     Route::get('{user}/edit', [\App\Http\Controllers\Account\UsersController::class, 'edit'])->name('edit')
         ->middleware('can:view,user');
     Route::put('{user}/update', [\App\Http\Controllers\Account\UsersController::class, 'update'])->name('update');
+    Route::get('wishlist', \App\Http\Controllers\Account\WishListController::class)->name('wishlist');
 });
 
 Route::name('cart.')->prefix('cart')->group(function () {
@@ -49,4 +50,9 @@ Route::name('cart.')->prefix('cart')->group(function () {
     Route::post('{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
     Route::delete('/', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
     Route::post('{product}/count', [\App\Http\Controllers\CartController::class, 'countUpdate'])->name('count.update');
+});
+
+Route::group(['auth'], function () {
+    Route::post('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'add'])->name('wishlist.add');
+    Route::delete('wishlist/{product}', [\App\Http\Controllers\WishListController::class, 'remove'])->name('wishlist.remove');
 });

@@ -15,9 +15,9 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{mix('/js/app.js')}}"></script>
     {{--    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">--}}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <!-- Scripts -->
-{{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
+    {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 
 </head>
 <body>
@@ -41,7 +41,8 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ __('Products') }}
                         </a>
 
@@ -55,7 +56,8 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ __('Categories') }}
                         </a>
 
@@ -74,7 +76,8 @@
                         {{--                            </a>--}}
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 

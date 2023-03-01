@@ -7,7 +7,7 @@
                     <a class="nav-link" href="{{ route('account.edit', Auth()->user()) }}">{{ __('Edit Profile') }}</a>
                 </li>
                 <li class="nav-item" style="padding: 0 5px;">
-                    {{--                    <a class="nav-link" href="{{ route('account.wishlist') }}">{{ __('WishList') }}</a>--}}
+                                        <a class="nav-link" href="{{ route('account.wishlist') }}">{{ __('WishList') }}</a>
                 </li>
                 {{--                <li class="nav-item">--}}
                 {{--                    <a class="nav-link" href="{{ route('account.orders.list') }}">{{ __('My orders') }}</a>--}}

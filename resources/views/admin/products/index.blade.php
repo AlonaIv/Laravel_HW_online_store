@@ -16,11 +16,12 @@
                 <table class="table align-self-center">
                     <thead>
                     <tr>
-                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">@sortablelink('id', 'ID')</th>
                         <th class="text-center" scope="col">Thumbnail</th>
-                        <th class="text-center" scope="col">Name</th>
-                        <th class="text-center" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">@sortablelink('title', 'Name')</th>
+                        <th class="text-center" scope="col">@sortablelink('quantity', 'Quantity')</th>
                         <th class="text-center" scope="col">Category</th>
+                        <th class="text-center" scope="col">@sortablelink('followers_count', 'Followers')</th>
                         <th class="text-center" scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -35,6 +36,7 @@
                             <td class="text-center" scope="col">
                                 @each('categories.parts.category_view', $product->categories, 'category')
                             </td>
+                            <td class="text-center" scope="col">{{ $product->followers_count }}</td>
                             <td class="text-center" scope="col">
                                 <a href="{{ route('admin.products.edit', $product) }}"
                                    class="btn btn-info form-control">Edit</a>

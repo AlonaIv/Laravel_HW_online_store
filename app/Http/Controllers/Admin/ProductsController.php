@@ -22,7 +22,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::with('categories')->orderByDesc('created_at')->paginate(5);
+        $products = Product::with('categories')->withCount('followers')->sortable()->paginate(5);
 
         return view('admin/products/index', compact('products'));
     }
