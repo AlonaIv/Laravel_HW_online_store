@@ -151,7 +151,5 @@
     </div>
 @endsection
 @push('footer-scripts')
-    <script type="module" src="{{ mix('js/images-preview.js') }}"></script>
-
-    {{--    @vite(['resources/js/images-preview.js'])--}}
+        @vite(['resources/js/images-preview.js'])
 @endpush
