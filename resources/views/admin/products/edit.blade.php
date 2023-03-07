@@ -171,6 +171,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ mix('js/images-preview.js') }}"></script>
-    {{--    @vite(['resources/js/images-preview.js', 'resources/js/images-actions.js'])--}}
+        @vite(['resources/js/images-preview.js', 'resources/js/images-actions.js'])
 @endpush
