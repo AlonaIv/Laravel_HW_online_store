@@ -1,7 +1,7 @@
 import '../bootstrap'
 
 function getFields() {
-    return $('#order-form').serializeArray().reduce(function (obj, item) {
+    return $('#order-form').serializeArray().reduce(function(obj, item) {
         obj[item.name] = item.value;
         return obj;
     }, {})
@@ -22,7 +22,7 @@ const headers = {
 };
 
 paypal.Buttons({
-    onClick: function (data, actions) {
+    onClick: function(data, actions) {
         if (isEmptyFields()) {
             alert('Please fill the form');
             return;
@@ -30,14 +30,14 @@ paypal.Buttons({
     },
 
     // Call your server to set up the transaction
-    createOrder: function (data, actions) {
+    createOrder: function(data, actions) {
         return fetch('/paypal/order/create/', {
             method: 'post',
             headers: headers,
             body: JSON.stringify(getFields())
-        }).then(function (res) {
+        }).then(function(res) {
             return res.json();
-        }).then(function (orderData) {
+        }).then(function(orderData) {
             console.log('orderData', orderData);
             return orderData.vendor_order_id;
         }).catch(function (error) {
@@ -47,21 +47,19 @@ paypal.Buttons({
     },
 
     // Call your server to finalize the transaction
-    onApprove: function (data, actions) {
+    onApprove: function(data, actions) {
         return fetch('/paypal/order/' + data.orderID + '/capture/', {
             method: 'post',
             headers: headers
-        }).then(function (res) {
+        }).then(function(res) {
             return res.json();
-        }).then(function (orderData) {
+        }).then(function(orderData) {
             iziToast.success({
                 title: 'Payment process was completed',
                 position: 'topRight',
-                onClosing: () => {
-                    window.location.href = `/paypal/order/${orderData.id}/thankYou`
-                }
+                onClosing: () => { window.location.href = `/paypal/order/${orderData.id}/thankYou` }
             })
-        }).catch(function (orderData) {
+        }).catch(function(orderData) {
             var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
 
             if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
@@ -79,7 +77,7 @@ paypal.Buttons({
             // Successful capture! For demo purposes:
             console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
             var transaction = orderData.purchase_units[0].payments.captures[0];
-            alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+            alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
             // Replace the above to show a success message within this page, e.g.
             // const element = document.getElementById('paypal-button-container');

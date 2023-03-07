@@ -39,6 +39,6 @@ class CreateOrderRequest extends FormRequest
             return parent::json()->all();
         }
 
-        return collect(parent::json()->all()->only($keys)->toArray());
+        return collect(parent::json()->all())->only($keys)->toArray();
     }
 }
