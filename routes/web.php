@@ -43,6 +43,7 @@ Route::name('account.')->prefix('account')->middleware('role:customer')->group(f
         ->middleware('can:view,user');
     Route::put('{user}/update', [\App\Http\Controllers\Account\UsersController::class, 'update'])->name('update');
     Route::get('wishlist', \App\Http\Controllers\Account\WishListController::class)->name('wishlist');
+    Route::get('telegram/callback', [\App\Http\Controllers\TelegramCallbackController::class, '__invoke'])->name('telegram.callback');
 });
 
 Route::name('cart.')->prefix('cart')->group(function () {
