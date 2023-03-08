@@ -30,7 +30,7 @@ class OrderRepository implements Contract\OrderRepositoryContract
 
         if ($adapter->status === self::ORDER_STATUSES['completed']) {
             $order->update([
-                'status_id' => OrderStatus::paid()->firstOrFail()->id,
+                'status_id' => OrderStatus::paid()->firstOrFail()?->id,
             ]);
         }
 

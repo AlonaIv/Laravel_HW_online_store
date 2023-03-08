@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\OrderCreated;
 use App\Helpers\TransactionAdapter;
 use App\Http\Requests\CreateOrderRequest;
 use App\Repositories\Contract\OrderRepositoryContract;
@@ -38,7 +39,7 @@ class PaypalService implements Contracts\PaypalServiceContract
             $order = $repository->create($request);
 
             \DB::commit();
-
+//dd(json_encode($order->toArray()));
             return response()->json($order);
         } catch (\Exception $exception) {
             \DB::rollBack();
@@ -62,6 +63,8 @@ class PaypalService implements Contracts\PaypalServiceContract
 
             \DB::commit();
 
+            OrderCreated::dispatch($order);
+
             return response()->json($result);
         } catch (\Exception $exception) {
             \DB::rollBack();
@@ -70,8 +73,7 @@ class PaypalService implements Contracts\PaypalServiceContract
         }
     }
 
-    protected
-    function createPaymentOrder($total)
+    protected function createPaymentOrder($total)
     {
         return $this->payPalClient->createOrder([
             'intent' => 'CAPTURE',
@@ -86,8 +88,7 @@ class PaypalService implements Contracts\PaypalServiceContract
         ]);
     }
 
-    protected
-    function errorHandler(\Exception $exception)
+    protected function errorHandler(\Exception $exception)
     {
         logs()->warning($exception);
 

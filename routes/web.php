@@ -65,3 +65,19 @@ Route::group(['auth'], function () {
         Route::get('order/{orderId}/thankYou', [\App\Http\Controllers\Payments\PaypalController::class, 'thankYou'])->name('orders.thankYou');
     });
 });
+
+Route::get('/notify', function () {
+    logs()->info('start');
+    $order = \App\Models\Order::all()->last();
+    \App\Events\OrderCreated::dispatch($order);
+    logs()->info('end');
+});
+
+Route::get('/invoice', function () {
+    dump('start');
+    $order = \App\Models\Order::all()->last();
+    $invoiceService = new \App\Services\InvoicesService();
+    $invoice = $invoiceService->generate($order);
+    echo $invoice->url();
+    dump('end');
+});
