@@ -3,7 +3,7 @@
     <br>
     <script async
             src="https://telegram.org/js/telegram-widget.js?19"
-            data-telegram-login="{{ config('services.telegram-bot-api.name') }}"
+            data-telegram-login="{{ config('telegramloginwidget.name') }}"
             data-size="large"
             data-radius="0"
             data-auth-url="{{ route('account.telegram.callback') }}"
