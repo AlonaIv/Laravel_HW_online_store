@@ -8,7 +8,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/images-preview.js',
-                'resources/js/payments/paypal.js'
+                'resources/js/payments/paypal.js',
+                'resources/js/payments/product-actions.js'
             ],
             refresh: true,
         }),

@@ -19,7 +19,7 @@
             <p>Price: {{ $product->end_price }}$</p>
             <p>SKU: {{ $product->SKU }}</p>
             <p>In stock: {{ $product->quantity }}</p>
-            {{--            <p>Rating: {{ round($product->averageRating(), 2) }}</p>--}}
+            <p>Rating: {{ round($product->averageRating(), 2) }}</p>
             <hr>
             <div>
                 <p>Product Category:
@@ -31,55 +31,51 @@
                 @include('products.parts.by_product', ['product'=>$product, 'showQuantity'=>true, 'btnText'=>'Buy'])
             </div>
             @auth
-                {{--                <form class="form-horizontal poststars" action="{{ route('product.rating.add', $product) }}"--}}
-                {{--                      id="addStar"--}}
-                {{--                      method="POST">--}}
-                {{--                    @csrf--}}
-                {{--                    <div class="form-group required">--}}
-                {{--                        <div class="col-sm-3 stars">--}}
-                {{--                            @if(!is_null($userRating))--}}
-                {{--                                @for($i = 5; $i >= 1; $i--)--}}
-                {{--                                    <input class="star star-{{$i}}"--}}
-                {{--                                           value="{{$i}}"--}}
-                {{--                                           id="star-{{$i}}"--}}
-                {{--                                           type="radio"--}}
-                {{--                                           name="star"--}}
-                {{--                                        {{--}}
-                {{--                                        $i == $userRating->rating--}}
-                {{--                                        ? 'checked'--}}
-                {{--                                        : ''--}}
-                {{--                                        }}--}}
-                {{--                                    />--}}
-                {{--                                    <label class="star star-{{$i}}" for="star-{{$i}}"></label>--}}
-                {{--                                @endfor--}}
-                {{--                            @else--}}
-                {{--                                <input class="star star-5" value="5" id="star-5" type="radio" name="star"/>--}}
-                {{--                                <label class="star star-5" for="star-5"></label>--}}
-                {{--                                <input class="star star-4" value="4" id="star-4" type="radio" name="star"/>--}}
-                {{--                                <label class="star star-4" for="star-4"></label>--}}
-                {{--                                <input class="star star-3" value="3" id="star-3" type="radio" name="star"/>--}}
-                {{--                                <label class="star star-3" for="star-3"></label>--}}
-                {{--                                <input class="star star-2" value="2" id="star-2" type="radio" name="star"/>--}}
-                {{--                                <label class="star star-2" for="star-2"></label>--}}
-                {{--                                <input class="star star-1" value="1" id="star-1" type="radio" name="star"/>--}}
-                {{--                                <label class="star star-1" for="star-1"></label>--}}
-                {{--                            @endif--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </form>--}}
+                <form class="form-horizontal poststars" action="{{ route('products.rate', $product) }}"
+                      id="addStar"
+                      method="POST">
+                    @csrf
+                    <div class="form-group required">
+                        <div class="col-sm-3 stars">
+                            @if(!is_null($product->user_rate))
+                                @for($i = 1; $i <= 5; $i++)
+                                    <input class="star star-{{$i}}"
+                                           value="{{$i}}"
+                                           id="star-{{$i}}"
+                                           type="radio"
+                                           name="star"
+                                        {{ $i == $product->user_rate?->rating ? 'checked' : '' }}
+                                    />
+                                    <label class="star star-{{$i}}" for="star-{{$i}}"></label>
+                                @endfor
+                            @else
+                                <input class="star star-1" value="1" id="star-1" type="radio" name="star"/>
+                                <label class="star star-1" for="star-1"></label>
+                                <input class="star star-2" value="2" id="star-2" type="radio" name="star"/>
+                                <label class="star star-2" for="star-2"></label>
+                                <input class="star star-3" value="3" id="star-3" type="radio" name="star"/>
+                                <label class="star star-3" for="star-3"></label>
+                                <input class="star star-4" value="4" id="star-4" type="radio" name="star"/>
+                                <label class="star star-4" for="star-4"></label>
+                                <input class="star star-5" value="5" id="star-5" type="radio" name="star"/>
+                                <label class="star star-5" for="star-5"></label>
+                            @endif
+                        </div>
+                    </div>
+                </form>
                 <hr>
-                    @if(auth()->user()->isWishedProduct($product))
-                        <form action="{{ route('wishlist.remove', $product) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="btn btn-outline-danger" value="Remove from Wish List">
-                        </form>
-                    @else
-                        <form action="{{ route('wishlist.add', $product) }}" method="POST">
-                            @csrf
-                            <input type="submit" class="btn btn-outline-success" value="'Add to Wish List">
-                        </form>
-                    @endif
+                @if(auth()->user()->isWishedProduct($product))
+                    <form action="{{ route('wishlist.remove', $product) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-outline-danger" value="Remove from Wish List">
+                    </form>
+                @else
+                    <form action="{{ route('wishlist.add', $product) }}" method="POST">
+                        @csrf
+                        <input type="submit" class="btn btn-outline-success" value="'Add to Wish List">
+                    </form>
+                @endif
             @endauth
         </div>
     </div>
@@ -114,6 +110,6 @@
     {{--        </div>--}}
     {{--    </div>--}}
 @endsection
-{{--@push('footer-scripts')--}}
-{{--    @vite(['resources/js/product-actions.js'])--}}
-{{--@endpush--}}
+@push('footer-scripts')
+    @vite(['resources/js/product-actions.js'])
+@endpush
