@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Kyslik\ColumnSortable\Sortable;
+use willvincent\Rateable\Rateable;
 
 class Product extends Model
 {
-    use HasFactory, Sortable;
+    use HasFactory, Sortable, Rateable;
 
     public mixed $quantty;
 
@@ -105,5 +106,15 @@ class Product extends Model
     public function available(): Attribute
     {
         return Attribute::get(fn() => $this->attributes['quantity'] > 0);
+    }
+
+    public function userRate(): Attribute
+    {
+        return Attribute::get(function () {
+            return $this->ratings()->where([
+                ['rateable_id', $this->id],
+                ['user_id', auth()->id()]
+            ])?->first();
+        });
     }
 }

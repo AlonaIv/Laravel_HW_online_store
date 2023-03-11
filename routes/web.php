@@ -65,6 +65,8 @@ Route::group(['auth'], function () {
         Route::post('order/{orderId}/capture', [\App\Http\Controllers\Payments\PaypalController::class, 'capture'])->name('orders.capture');
         Route::get('order/{orderId}/thankYou', [\App\Http\Controllers\Payments\PaypalController::class, 'thankYou'])->name('orders.thankYou');
     });
+
+    Route::post('products/{product}/rate', [\App\Http\Controllers\ProductsController::class, 'rate'])->name('products.rate');
 });
 
 Route::get('/notify', function () {
