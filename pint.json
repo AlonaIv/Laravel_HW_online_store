@@ -1,0 +1,12 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "no_superfluous_phpdoc_tags": false
+    },
+    "exclude": [
+        "tests"
+    ],
+    "notName": [
+        "server.php"
+    ]
+}

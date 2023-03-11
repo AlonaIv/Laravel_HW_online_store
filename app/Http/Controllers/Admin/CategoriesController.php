@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateCategory;
 use App\Http\Requests\Admin\UpdateCategory;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
